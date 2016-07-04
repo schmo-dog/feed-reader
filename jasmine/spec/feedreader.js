@@ -128,16 +128,16 @@ $(function() {
         var currentHeaderTitle = $('.header-title').html();
 
         beforeEach(function(done) {
-            loadFeed(1, done); // load feed at index 2 and test
+            loadFeed(0, done);
 
         });
 
         afterEach(function(done) {
-            loadFeed(0, done); // load feed at index 1 and test again to see if it is different
+            loadFeed(1, done);
         });
 
         it('content has loaded and has been changed', function() {
-            expect($('.header-title').html()).not.toBe(currentHeaderTitle); //test with a change in the header text
+            expect($('.header-title').html()).not.toBe(currentHeaderTitle);
         });
     });
 

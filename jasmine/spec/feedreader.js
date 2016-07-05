@@ -125,20 +125,26 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.*/
 
-        var currentHeaderTitle = $('.header-title').html();
+        var firstContent;
+        var secondContent;
 
         beforeEach(function(done) {
-            loadFeed(0, done);
+            loadFeed(1, function() {
+                firstContent = $('.feed').html();
+                done();
+            });
+        });
+
+        it('content has loaded and has been changed', function(done) {
+
+            loadFeed(2, function() {
+                secondContent = $('.feed').html();
+                expect(secondContent).not.toEqual(firstContent);
+                done();
+            });
 
         });
 
-        afterEach(function(done) {
-            loadFeed(1, done);
-        });
-
-        it('content has loaded and has been changed', function() {
-            expect($('.header-title').html()).not.toBe(currentHeaderTitle);
-        });
     });
 
 });
